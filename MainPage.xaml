@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MixCloud_App.MainPage"
+             xmlns:local="clr-namespace:MixCloud_App.ViewModels">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Entry x:Name="searchEntry"
+                   Placeholder="Digite um termo para busca..."/>
+            <Picker x:Name="searchTypePicker"
+                    Title="Selecione o tipo de busca">
+                <Picker.Items>
+                    <x:String>cloudcast</x:String>
+                    <x:String>user</x:String>
+                    <x:String>tag</x:String>
+                </Picker.Items>
+            </Picker>
+            <Button Text="Buscar"
+                    Clicked="ButtonClicked"/>
+            <CollectionView ItemsSource="{Binding MixCloudResult.Data}"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10"
+                                     Spacing="5">
+                            <Image Source="{Binding Pictures.Large}"
+                                   HeightRequest="200"
+                                   WidthRequest="200"
+                                   Aspect="AspectFill"/>
+                            <Label Text="{Binding Name}"
+                                   FontAttributes="Bold"
+                                   TextColor="Yellow"
+                                   FontSize="20"/>
+                            <Label FontAttributes="Bold"
+                                   Text="{Binding User.Name, StringFormat='DJ: {0}'}"/>
+                            <Label Text="{Binding PlayCount, StringFormat='{0} execuções'}"/>
+                            <Button Text="Ir para MixCloud"
+                                    CommandParameter="{Binding Url}"
+                                    Clicked="GoToMixCloudButtonClicked"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
