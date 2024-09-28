@@ -1,5 +1,5 @@
 
-# MIXCLOUD-SEARCH-XAML
+# MIXCLOUD-MAUI-XAML
 
 Example of using the MixCloud API with Shows query (with MAUI + xaml)
 
